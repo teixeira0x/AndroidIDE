@@ -77,14 +77,18 @@ abstract class FieldBasedAction : BaseJavaCodeAction() {
       IProjectManager.getInstance().getWorkspace()?.findModuleForFile(file, false) ?: return Any()
 
     return JavaCompilerProvider.get(module).compile(file).get { task ->
-      val triple = findFields(task, file, range)
-      val type = triple.second
-      val fields = triple.third
-      val fieldNames = fields.map { "${it.name}: ${it.type}" } // Get the names
-
-      log.debug("Found {} fields in class {}", fieldNames.size, type.simpleName)
-
-      return@get fieldNames
+      return@get try {
+        val triple =  findFields(task, file, range)
+        val type = triple.second
+        val fields = triple.third
+        val fieldNames = fields.map { "${it.name}: ${it.type}" } // Get the names
+  
+        log.debug("Found {} fields in class {}", fieldNames.size, type.simpleName)
+  
+        fieldNames
+      } catch (error: Throwable) {
+        listOf<String>()
+      }
     }
   }
 
@@ -159,6 +163,11 @@ abstract class FieldBasedAction : BaseJavaCodeAction() {
     data: ActionData,
     listener: OnFieldsSelectedListener?
   ) {
+    if (fields.isEmpty()) {
+      log.info("No fields for selector")
+      return
+    }
+
     val names = fields.toTypedArray()
     val checkedNames = mutableSetOf<String>()
     val builder = newDialogBuilder(data)
