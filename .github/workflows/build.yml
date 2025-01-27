@@ -62,7 +62,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Generate APK
-        run: ./gradlew assemble${{ matrix.build-type }}
+        run: ./gradlew :core:app:assemble${{ matrix.build-type }}
 
       - name: Upload APK
         uses: actions/upload-artifact@master
