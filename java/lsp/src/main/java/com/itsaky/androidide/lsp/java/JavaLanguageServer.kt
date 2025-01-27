@@ -269,15 +269,19 @@ class JavaLanguageServer : ILanguageServer {
       return
     }
 
-    // TODO Find an alternative to efficiently update changeDelta in JavaCompilerService instance
-    JavaCompilerService.NO_MODULE_COMPILER.onDocumentChange(event)
-    val module = getInstance()
-      .getWorkspace()?.findModuleForFile(event.changedFile, true)
-    if (module != null) {
-      val compiler = JavaCompilerProvider.get(module)
-      compiler.onDocumentChange(event)
+    runCatching {
+      // TODO Find an alternative to efficiently update changeDelta in JavaCompilerService instance
+      JavaCompilerService.NO_MODULE_COMPILER.onDocumentChange(event)
+      val module = getInstance()
+        .getWorkspace()?.findModuleForFile(event.changedFile, true)
+      if (module != null) {
+        val compiler = JavaCompilerProvider.get(module)
+        compiler.onDocumentChange(event)
+      }
+      startOrRestartAnalyzeTimer()
+    }.onFailure { error ->
+      log.error("Error on dispatch `onDocumentChange`", error)
     }
-    startOrRestartAnalyzeTimer()
   }
 
   @Subscribe(threadMode = ThreadMode.ASYNC)
