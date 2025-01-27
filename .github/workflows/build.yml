@@ -63,10 +63,28 @@ jobs:
 
       - name: Generate APK
         run: ./gradlew :core:app:assemble${{ matrix.build-type }}
-
-      - name: Upload APK
-        uses: actions/upload-artifact@master
+        
+      - name: Copy ${{ matrix.build_type }} APK
+        run: |
+          cp core/app/build/outputs/apk/${{ matrix.build_type }}/app-*.apk ./
+      - name: Upload arm64-v8a ${{ matrix.build_type }} APK
+        uses: actions/upload-artifact@v4
         with:
-          name: app-${{ matrix.build-type }}
-          path: app/build/outputs/apk/${{ matrix.build-type }}/app-${{ matrix.build-type }}.apk
-          
+          name: apk-arm64-v8a-${{ matrix.build_type }}
+          path: app-arm64-v8a-${{ matrix.build_type }}.apk
+      - name: Upload armeabi-v7a ${{ matrix.build_type }} APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: apk-armeabi-v7a-${{ matrix.build_type }}
+          path: app-armeabi-v7a-${{ matrix.build_type }}.apk
+      - name: Upload x86_64 ${{ matrix.build_type }} APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: apk-x86_64-${{ matrix.build_type }}
+          path: app-x86_64-${{ matrix.build_type }}.apk
+      - name: Upload ${{ matrix.build_type }} mappings
+        if: ${{ always() && matrix.build_type == 'release' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-mappings
+          path: '**/build/outputs/mapping'
