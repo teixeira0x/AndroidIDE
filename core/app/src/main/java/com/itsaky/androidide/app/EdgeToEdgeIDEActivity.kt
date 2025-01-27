@@ -151,8 +151,6 @@ abstract class EdgeToEdgeIDEActivity : IDEActivity() {
       this.window.decorView,
       this.onApplyWindowInsetsListener
     )
-
-    this.window.decorView.doOnAttach { onApplySystemBarInsets(getSystemBarInsets(it)) }
   }
 
   /**
@@ -163,10 +161,10 @@ abstract class EdgeToEdgeIDEActivity : IDEActivity() {
   @CallSuper
   protected open fun onApplyWindowInsets(insets: WindowInsetsCompat) {
     this.systemBarInsets = getSystemBarInsets(insets)
+    this.window.decorView.doOnLayout {
+      onApplySystemBarInsets(this.systemBarInsets)
+    }
   }
 
-  /**
-   * Called with the system bar insets when the decor view is attached to the window.
-   */
   protected open fun onApplySystemBarInsets(insets: Insets) {}
 }
