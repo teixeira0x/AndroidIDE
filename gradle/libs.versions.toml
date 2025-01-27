@@ -135,9 +135,6 @@ xml-remark = { module = "com.kotcrab.remark:remark", version = "1.2.0" }
 xml-resolver = { module = "xml-resolver:xml-resolver", version = "1.2" }
 xml-jb-annotations = { module = "org.jetbrains:annotations", version = "24.1.0" }
 
-# GIT
-git-jgit = { module = "org.eclipse.jgit:org.eclipse.jgit", version = "6.8.0.202311291450-r" }
-
 # Tests
 tests-junit = { module = "junit:junit", version = "4.13.2" }
 tests-junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }

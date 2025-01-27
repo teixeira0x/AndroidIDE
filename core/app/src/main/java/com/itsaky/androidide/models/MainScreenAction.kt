@@ -42,11 +42,10 @@ constructor(
 
     const val ACTION_CREATE_PROJECT = 0
     const val ACTION_OPEN_PROJECT = 1
-    const val ACTION_CLONE_REPO = 2
-    const val ACTION_OPEN_TERMINAL = 3
-    const val ACTION_PREFERENCES = 4
-    const val ACTION_DONATE = 5
-    const val ACTION_DOCS = 6
+    const val ACTION_OPEN_TERMINAL = 2
+    const val ACTION_PREFERENCES = 3
+    const val ACTION_DONATE = 4
+    const val ACTION_DOCS = 5
 
     /**
      * Get all main screen actions.
@@ -63,11 +62,6 @@ constructor(
           ACTION_OPEN_PROJECT,
           R.string.msg_open_existing_project,
           R.drawable.ic_folder)
-
-        val cloneGitRepository = MainScreenAction(
-          ACTION_CLONE_REPO,
-          R.string.git_clone_repo,
-          R.drawable.ic_git)
 
         val openTerminal = MainScreenAction(
           ACTION_OPEN_TERMINAL,

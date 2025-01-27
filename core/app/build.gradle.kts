@@ -74,9 +74,6 @@ kapt {
 
 desugaring {
   replacements {
-    includePackage(
-      "org.eclipse.jgit",
-    )
 
     applyJavaIOReplacements()
   }
@@ -104,9 +101,6 @@ dependencies {
   implementation(libs.google.auto.service.annotations)
   implementation(libs.google.gson)
   implementation(libs.google.guava)
-
-  // Git
-  implementation(libs.git.jgit)
 
   // AndroidX
   implementation(libs.androidx.splashscreen)

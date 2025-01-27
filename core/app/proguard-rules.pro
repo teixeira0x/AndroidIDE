@@ -137,14 +137,3 @@
 
 ## Used in Logback. We do not need this though.
 -dontwarn jakarta.servlet.ServletContainerInitializer
-
-## These are used in JGit
-## TODO(itsaky): Verify if it is safe to ignore these warnings
--dontwarn java.lang.ProcessHandle
--dontwarn java.lang.management.ManagementFactory
--dontwarn org.ietf.jgss.GSSContext
--dontwarn org.ietf.jgss.GSSCredential
--dontwarn org.ietf.jgss.GSSException
--dontwarn org.ietf.jgss.GSSManager
--dontwarn org.ietf.jgss.GSSName
--dontwarn org.ietf.jgss.Oid
