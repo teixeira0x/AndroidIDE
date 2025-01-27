@@ -87,7 +87,6 @@ constructor(
         Collections.addAll(this,
           createProject,
           openProject,
-          cloneGitRepository,
           openTerminal,
           preferences,
           donate,
