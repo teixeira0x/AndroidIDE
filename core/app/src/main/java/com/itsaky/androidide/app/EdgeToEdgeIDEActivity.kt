@@ -30,7 +30,7 @@ import androidx.core.graphics.Insets
 import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.doOnLayout
+import androidx.core.view.doOnAttach
 import com.itsaky.androidide.utils.EdgeToEdgeUtils
 import com.itsaky.androidide.utils.getSystemBarInsets
 import org.slf4j.LoggerFactory
@@ -151,9 +151,8 @@ abstract class EdgeToEdgeIDEActivity : IDEActivity() {
       this.window.decorView,
       this.onApplyWindowInsetsListener
     )
-    this.window.decorView.doOnLayout {
-      onApplySystemBarInsets(systemBarInsets!!)
-    }
+
+    this.window.decorView.doOnAttach { onApplySystemBarInsets(getSystemBarInsets(it)) }
   }
 
   /**
@@ -166,5 +165,8 @@ abstract class EdgeToEdgeIDEActivity : IDEActivity() {
     this.systemBarInsets = getSystemBarInsets(insets)
   }
 
+  /**
+   * Called with the system bar insets when the decor view is attached to the window.
+   */
   protected open fun onApplySystemBarInsets(insets: Insets) {}
 }
