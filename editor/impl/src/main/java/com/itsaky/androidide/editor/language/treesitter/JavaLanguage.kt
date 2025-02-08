@@ -26,7 +26,7 @@ import com.itsaky.androidide.lsp.api.ILanguageServer
 import com.itsaky.androidide.lsp.api.ILanguageServerRegistry
 import com.itsaky.androidide.lsp.java.JavaLanguageServer
 import com.itsaky.androidide.treesitter.java.TSLanguageJava
-import io.github.rosemoe.sora.lang.Language.INTERRUPTION_LEVEL_SLIGHT
+import io.github.rosemoe.sora.lang.Language.INTERRUPTION_LEVEL_STRONG
 import io.github.rosemoe.sora.util.MyCharacter
 import io.github.rosemoe.sora.widget.SymbolPairMatch
 
@@ -54,7 +54,7 @@ class JavaLanguage(context: Context) :
   }
 
   override fun getInterruptionLevel(): Int {
-    return INTERRUPTION_LEVEL_SLIGHT
+    return INTERRUPTION_LEVEL_STRONG
   }
 
   override fun getSymbolPairs(): SymbolPairMatch {
